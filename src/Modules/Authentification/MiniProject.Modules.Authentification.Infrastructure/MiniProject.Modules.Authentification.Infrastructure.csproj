@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<PackageReference Include="EFCore.NamingConventions" Version="9.0.0" />
+		<PackageReference Include="FluentValidation" Version="11.11.0" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+		<PackageReference Include="MediatR" Version="12.4.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\MiniProject.Modules.Authentification.Application\MiniProject.Modules.Authentification.Application.csproj" />
+		<ProjectReference Include="..\MiniProject.Modules.Authentification.Presentation\MiniProject.Modules.Authentification.Presentation.csproj" />
+	</ItemGroup>
+
+</Project>

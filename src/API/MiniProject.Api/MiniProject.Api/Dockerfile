@@ -12,10 +12,14 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/API/MiniProject.Api/MiniProject.Api/MiniProject.Api.csproj", "src/API/MiniProject.Api/MiniProject.Api/"]
-RUN dotnet restore "./src/API/MiniProject.Api/MiniProject.Api/MiniProject.Api.csproj"
+COPY ["API/MiniProject.Api/MiniProject.Api/MiniProject.Api.csproj", "API/MiniProject.Api/MiniProject.Api/"]
+COPY ["Modules/Authentification/MiniProject.Modules.Authentification.Infrastructure/MiniProject.Modules.Authentification.Infrastructure.csproj", "Modules/Authentification/MiniProject.Modules.Authentification.Infrastructure/"]
+COPY ["Modules/Authentification/MiniProject.Modules.Authentification.Application/MiniProject.Modules.Authentification.Application.csproj", "Modules/Authentification/MiniProject.Modules.Authentification.Application/"]
+COPY ["Modules/Authentification/MiniProject.Modules.Authentification.Domain/MiniProject.Modules.Authentification.Domain.csproj", "Modules/Authentification/MiniProject.Modules.Authentification.Domain/"]
+COPY ["Modules/Authentification/MiniProject.Modules.Authentification.Presentation/MiniProject.Modules.Authentification.Presentation.csproj", "Modules/Authentification/MiniProject.Modules.Authentification.Presentation/"]
+RUN dotnet restore "./API/MiniProject.Api/MiniProject.Api/MiniProject.Api.csproj"
 COPY . .
-WORKDIR "/src/src/API/MiniProject.Api/MiniProject.Api"
+WORKDIR "/src/API/MiniProject.Api/MiniProject.Api"
 RUN dotnet build "./MiniProject.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
