@@ -1,0 +1,29 @@
+﻿using Evently.Modules.Events.Application.Abstractions.Data;
+using System.Data.Common;
+using MediatR;
+using MiniProject.Modules.Authentification.Application.Users.Models;
+using Dapper;
+
+namespace MiniProject.Modules.Authentification.Application.Users.GetUsers;
+internal sealed class GetUsersQueryHandler(IDbConnectionFactory dbConnectionFactory) : IRequestHandler<GetUsersQuery, IReadOnlyCollection<UserResponse>>
+{
+    public async Task<IReadOnlyCollection<UserResponse>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+    {
+        await using DbConnection connection = await dbConnectionFactory.OpenConnectionAsync();
+
+        const string sql =
+            $"""
+                SELECT
+                    id as {nameof(UserResponse.Id)},
+                    name as {nameof(UserResponse.Name)},
+                    email as {nameof(UserResponse.Email)},
+                    user_name as {nameof(UserResponse.UserName)},
+                    password as {nameof(UserResponse.Password)}
+                FROM auth.users
+            """;
+
+        List<UserResponse> userResponse = (await connection.QueryAsync<UserResponse>(sql, request)).AsList();
+
+        return userResponse;
+    }
+}

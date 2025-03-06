@@ -15,7 +15,8 @@ public static class RegisterUser
             Guid userId = await sender.Send(command);
 
             return Results.Ok(userId);
-        });
+        })
+            .WithTags(Tags.Auth);
 
     }
 
