@@ -12,7 +12,12 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+COPY ["Directory.Build.props", "."]
 COPY ["src/API/MiniProject.Api/MiniProject.Api/MiniProject.Api.csproj", "src/API/MiniProject.Api/MiniProject.Api/"]
+COPY ["MiniProject.Modules.Events.Infrastructure/MiniProject.Modules.Events.Infrastructure.csproj", "MiniProject.Modules.Events.Infrastructure/"]
+COPY ["MiniProject.Modules.Events.Application/MiniProject.Modules.Events.Application.csproj", "MiniProject.Modules.Events.Application/"]
+COPY ["MiniProject.Modules.Events.Domain/MiniProject.Modules.Events.Domain.csproj", "MiniProject.Modules.Events.Domain/"]
+COPY ["MiniProject.Modules.Events.Presentation/MiniProject.Modules.Events.Presentation.csproj", "MiniProject.Modules.Events.Presentation/"]
 RUN dotnet restore "./src/API/MiniProject.Api/MiniProject.Api/MiniProject.Api.csproj"
 COPY . .
 WORKDIR "/src/src/API/MiniProject.Api/MiniProject.Api"
