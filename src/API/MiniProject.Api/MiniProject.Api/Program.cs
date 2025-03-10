@@ -1,7 +1,12 @@
+using Evently.Modules.Events.Infrastructure;
+using MiniProject.Api.Extensions;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddEventsModule(builder.Configuration);
 
 WebApplication app = builder.Build();
 
@@ -10,8 +15,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.ApplyMigrations();
 }
 
-app.MapGet("/api", () => new { response = "It Works" });
+EventsModule.MapEndpoints(app);
 
 app.Run();
