@@ -12,7 +12,7 @@ internal static class GetEventTest
 {
     public static void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("events/{id}", async (
+        app.MapGet("events-test/{id}", async (
             string id,
             ISender sender,
             IValidator<GetEventTestQuery> validator) =>

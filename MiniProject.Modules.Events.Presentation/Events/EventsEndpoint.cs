@@ -13,6 +13,9 @@ public static class EventsEndpoint
         
 
         GetEventTest.MapEndpoint(app);
+        GetEvent.MapEndpoint(app);
+
+        CreateEvent.MapEndpoint(app);
     }
 }
 
