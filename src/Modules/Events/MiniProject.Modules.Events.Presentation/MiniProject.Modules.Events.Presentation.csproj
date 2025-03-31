@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+	  <PackageReference Include="MediatR" Version="12.4.1" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\MiniProject.Modules.Events.Application\MiniProject.Modules.Events.Application.csproj" />
+		<ProjectReference Include="..\MiniProject.Modules.Events.Domain\MiniProject.Modules.Events.Domain.csproj" />
+	</ItemGroup>
+
+</Project>

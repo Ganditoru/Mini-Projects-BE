@@ -7,17 +7,17 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MiniProject.Modules.Authentification.Infrastructure.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateAuthDB : Migration
+    public partial class CreateUserTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "auth");
+                name: "auth2");
 
             migrationBuilder.CreateTable(
                 name: "users",
-                schema: "auth",
+                schema: "auth2",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -37,7 +37,7 @@ namespace MiniProject.Modules.Authentification.Infrastructure.Database.Migration
         {
             migrationBuilder.DropTable(
                 name: "users",
-                schema: "auth");
+                schema: "auth2");
         }
     }
 }

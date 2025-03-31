@@ -8,11 +8,11 @@ using MiniProject.Modules.Authentification.Application.Abstraction;
 using MiniProject.Modules.Authentification.Domain.Users;
 using MiniProject.Modules.Authentification.Infrastructure.Database;
 using MiniProject.Modules.Authentification.Infrastructure.Users;
-using MiniProject.Modules.Authentification.Presentation.User;
+using MiniProject.Modules.Authentification.Presentation.Users;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Npgsql;
-using Evently.Modules.Events.Application.Abstractions.Data;
-using Evently.Modules.Events.Infrastructure.Data;
+using MiniProject.Modules.Events.Application.Abstractions.Data;
+using MiniProject.Modules.Events.Infrastructure.Data;
 
 namespace MiniProject.Modules.Authentification.Infrastructure;
 public static class AuthentificationModule

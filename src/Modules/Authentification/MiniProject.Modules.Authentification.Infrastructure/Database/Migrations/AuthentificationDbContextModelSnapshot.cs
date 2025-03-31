@@ -17,7 +17,7 @@ namespace MiniProject.Modules.Authentification.Infrastructure.Database.Migration
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("auth")
+                .HasDefaultSchema("auth2")
                 .HasAnnotation("ProductVersion", "9.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -53,7 +53,7 @@ namespace MiniProject.Modules.Authentification.Infrastructure.Database.Migration
                     b.HasKey("Id")
                         .HasName("pk_users");
 
-                    b.ToTable("users", "auth");
+                    b.ToTable("users", "auth2");
                 });
 #pragma warning restore 612, 618
         }

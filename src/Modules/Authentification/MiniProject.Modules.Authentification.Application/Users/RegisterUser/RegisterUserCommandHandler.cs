@@ -9,7 +9,7 @@ internal sealed class RegisterUserCommandHandler(IUserRepository userRepository,
 
     public async Task<Guid> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
-        var user = new User(request.Name, request.Email, request.UserName, request.Password);
+        var user = User.Create(request.Name, request.Email, request.UserName, request.Password);
 
         userRepository.Insert(user);
 

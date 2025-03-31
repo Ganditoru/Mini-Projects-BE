@@ -1,4 +1,4 @@
-﻿namespace MiniProject.Modules.Authentification.Application.Users.Models;
+﻿namespace MiniProject.Modules.Authentification.Application.Users;
 
 public sealed record UserResponse(
     Guid Id,

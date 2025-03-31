@@ -1,8 +1,7 @@
 ﻿using System.Data.Common;
 using Dapper;
-using Evently.Modules.Events.Application.Abstractions.Data;
+using MiniProject.Modules.Events.Application.Abstractions.Data;
 using MediatR;
-using MiniProject.Modules.Authentification.Application.Users.Models;
 
 namespace MiniProject.Modules.Authentification.Application.Users.GetUser;
 internal sealed class GetUserQueryHandler(IDbConnectionFactory dbConnectionFactory) : IRequestHandler<GetUserQuery, UserResponse?>

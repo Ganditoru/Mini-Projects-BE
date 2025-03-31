@@ -17,6 +17,10 @@ COPY ["Modules/Authentification/MiniProject.Modules.Authentification.Infrastruct
 COPY ["Modules/Authentification/MiniProject.Modules.Authentification.Application/MiniProject.Modules.Authentification.Application.csproj", "Modules/Authentification/MiniProject.Modules.Authentification.Application/"]
 COPY ["Modules/Authentification/MiniProject.Modules.Authentification.Domain/MiniProject.Modules.Authentification.Domain.csproj", "Modules/Authentification/MiniProject.Modules.Authentification.Domain/"]
 COPY ["Modules/Authentification/MiniProject.Modules.Authentification.Presentation/MiniProject.Modules.Authentification.Presentation.csproj", "Modules/Authentification/MiniProject.Modules.Authentification.Presentation/"]
+COPY ["Modules/Events/MiniProject.Modules.Events.Infrastructure/MiniProject.Modules.Events.Infrastructure.csproj", "Modules/Events/MiniProject.Modules.Events.Infrastructure/"]
+COPY ["Modules/Events/MiniProject.Modules.Events.Application/MiniProject.Modules.Events.Application.csproj", "Modules/Events/MiniProject.Modules.Events.Application/"]
+COPY ["Modules/Events/MiniProject.Modules.Events.Domain/MiniProject.Modules.Events.Domain.csproj", "Modules/Events/MiniProject.Modules.Events.Domain/"]
+COPY ["Modules/Events/MiniProject.Modules.Events.Presentation/MiniProject.Modules.Events.Presentation.csproj", "Modules/Events/MiniProject.Modules.Events.Presentation/"]
 RUN dotnet restore "./API/MiniProject.Api/MiniProject.Api/MiniProject.Api.csproj"
 COPY . .
 WORKDIR "/src/API/MiniProject.Api/MiniProject.Api"

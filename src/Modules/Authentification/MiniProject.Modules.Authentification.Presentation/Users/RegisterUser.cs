@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using MiniProject.Modules.Authentification.Application.Users.RegisterUser;
 
-namespace MiniProject.Modules.Authentification.Presentation.User;
-public static class RegisterUser
+namespace MiniProject.Modules.Authentification.Presentation.Users;
+internal static class RegisterUser
 {
     public static void MapEndpoint(IEndpointRouteBuilder app)
     {

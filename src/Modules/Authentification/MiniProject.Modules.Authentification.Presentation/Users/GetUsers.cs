@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using MiniProject.Modules.Authentification.Application.Users;
 using MiniProject.Modules.Authentification.Application.Users.GetUsers;
-using MiniProject.Modules.Authentification.Application.Users.Models;
 
 namespace MiniProject.Modules.Authentification.Presentation.Users;
 internal static class GetUsers

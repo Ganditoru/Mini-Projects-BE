@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Routing;
-using MiniProject.Modules.Authentification.Presentation.Users;
 
-namespace MiniProject.Modules.Authentification.Presentation.User;
+namespace MiniProject.Modules.Authentification.Presentation.Users;
 public static  class UserEndpoints
 {
     public static void MapEndpoints(IEndpointRouteBuilder app)

@@ -7,7 +7,7 @@
     <UserSecretsId>89843196-0c4a-423f-a83a-e6ad91643f45</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..</DockerfileContext>
-    <DockerComposeProjectPath>..\..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+    <DockerComposeProjectPath>..\..\..\..\miniprojectcompose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Modules\Authentification\MiniProject.Modules.Authentification.Infrastructure\MiniProject.Modules.Authentification.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\Modules\Events\MiniProject.Modules.Events.Infrastructure\MiniProject.Modules.Events.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

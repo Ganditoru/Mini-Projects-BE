@@ -2,16 +2,7 @@
 
 public sealed class User
 {
-    public User() { }
-
-    public User(string name, string email,string username, string password)
-    {
-        Id = Guid.NewGuid();
-        Name = name;
-        Email = email;
-        UserName = username;
-        Password = password;
-    }
+    private User() { }
 
     public Guid Id { get; set; }
 
@@ -23,5 +14,19 @@ public sealed class User
 
     public string UserName { get; set; }
 
+
+    public static User Create(string name, string email, string username, string password)
+    {
+        var user = new User()
+        {
+            Id = Guid.NewGuid(),
+            Name = name,
+            Email = email,
+            UserName = username,
+            Password = password
+        };
+
+        return user;
+    }
 }
 

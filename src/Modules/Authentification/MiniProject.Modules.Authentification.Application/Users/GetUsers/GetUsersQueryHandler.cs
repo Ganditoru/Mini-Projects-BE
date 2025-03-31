@@ -1,7 +1,6 @@
-﻿using Evently.Modules.Events.Application.Abstractions.Data;
+﻿using MiniProject.Modules.Events.Application.Abstractions.Data;
 using System.Data.Common;
 using MediatR;
-using MiniProject.Modules.Authentification.Application.Users.Models;
 using Dapper;
 
 namespace MiniProject.Modules.Authentification.Application.Users.GetUsers;
