@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MiniProject.Modules.Authentification.Infrastructure.Database;
+using MiniProject.Modules.Users.Infrastructure.Database;
 using MiniProject.Modules.Events.Infrastructure.Database;
 
 namespace MiniProject.Api.Extensions;
@@ -10,7 +10,7 @@ internal static class MigrationExtensions
     {
         using IServiceScope scope = app.ApplicationServices.CreateScope();
 
-        ApplyMigration<AuthentificationDbContext>(scope);
+        ApplyMigration<UserDbContext>(scope);
         ApplyMigration<EventsDbContext>(scope);
     }
 

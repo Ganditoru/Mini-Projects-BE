@@ -1,0 +1,25 @@
+﻿
+using Microsoft.EntityFrameworkCore;
+using MiniProject.Modules.Users.Domain.Users;
+using MiniProject.Modules.Users.Infrastructure.Database;
+
+namespace MiniProject.Modules.Users.Infrastructure.Users;
+internal sealed class UserRepository(UserDbContext context) : IUserRepository
+{
+    public User? FindById(Guid id)
+    {
+        return context.Users
+            .Include(u => u.Notifications)
+            .FirstOrDefault(u => u.Id == id);
+    }
+
+    public void Insert(User user)
+    {
+        context.Users.Add(user);
+    }
+
+    public void Update(User user)
+    {
+        context.Users.Update(user);
+    }
+}

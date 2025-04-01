@@ -17,10 +17,6 @@ COPY ["Modules/Events/MiniProject.Modules.Events.Infrastructure/MiniProject.Modu
 COPY ["Modules/Events/MiniProject.Modules.Events.Application/MiniProject.Modules.Events.Application.csproj", "Modules/Events/MiniProject.Modules.Events.Application/"]
 COPY ["Modules/Events/MiniProject.Modules.Events.Domain/MiniProject.Modules.Events.Domain.csproj", "Modules/Events/MiniProject.Modules.Events.Domain/"]
 COPY ["Modules/Events/MiniProject.Modules.Events.Presentation/MiniProject.Modules.Events.Presentation.csproj", "Modules/Events/MiniProject.Modules.Events.Presentation/"]
-COPY ["Modules/Users/MiniProject.Modules.Users.Infrastructure/MiniProject.Modules.User.Infrastructure.csproj", "Modules/Users/MiniProject.Modules.Users.Infrastructure/"]
-COPY ["Modules/Users/MiniProject.Modules.Users.Application/MiniProject.Modules.User.Application.csproj", "Modules/Users/MiniProject.Modules.Users.Application/"]
-COPY ["Modules/Users/MiniProject.Modules.Users.Domain/MiniProject.Modules.User.Domain.csproj", "Modules/Users/MiniProject.Modules.Users.Domain/"]
-COPY ["Modules/Users/MiniProject.Modules.Users.Presentation/MiniProject.Modules.User.Presentation.csproj", "Modules/Users/MiniProject.Modules.Users.Presentation/"]
 RUN dotnet restore "./API/MiniProject.Api/MiniProject.Api/MiniProject.Api.csproj"
 COPY . .
 WORKDIR "/src/API/MiniProject.Api/MiniProject.Api"

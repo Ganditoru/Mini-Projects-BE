@@ -1,0 +1,20 @@
+﻿
+using MediatR;
+using MiniProject.Modules.Users.Application.Abstraction;
+using MiniProject.Modules.Users.Domain.Users;
+
+namespace MiniProject.Modules.Users.Application.Users.RegisterUser;
+internal sealed class RegisterUserCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork) : IRequestHandler<RegisterUserCommand, Guid>
+{
+
+    public async Task<Guid> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+    {
+        var user = User.Create(request.Name, request.Email, request.UserName, request.Password);
+
+        userRepository.Insert(user);
+
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return user.Id;
+    }
+}
