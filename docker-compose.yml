@@ -1,6 +1,25 @@
+version: '3.9'
+
 services:
   miniproject.api:
     image: ${DOCKER_REGISTRY-}miniprojectapi
+    container_name: MiniProject-BE.Api
     build:
       context: src
       dockerfile: API/MiniProject.Api/MiniProject.Api/Dockerfile
+    ports:
+      - 5000:8080
+      - 5001:8081
+
+  miniproject.database:
+    image: postgres:latest
+    container_name: MiniProject.Database
+    environment:
+      - POSTGRES_DB=evently
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/db:/var/lib/postgresql/data
+    ports:
+      - 5433:5433
+

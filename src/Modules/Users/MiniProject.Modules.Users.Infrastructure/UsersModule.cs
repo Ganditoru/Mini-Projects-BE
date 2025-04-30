@@ -14,6 +14,8 @@ using Npgsql;
 using MiniProject.Modules.Events.Application.Abstractions.Data;
 using MiniProject.Modules.Events.Infrastructure.Data;
 using MiniProject.Modules.Users.Presentation.Notifications;
+using MiniProject.Modules.Users.PublicAPI;
+using MiniProject.Modules.Users.Infrastructure.PublicApi;
 
 namespace MiniProject.Modules.Users.Infrastructure;
 public static class UsersModule
@@ -57,6 +59,7 @@ public static class UsersModule
                 .UseSnakeCaseNamingConvention());
 
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserApi, UserApi>();
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<UserDbContext>());
 
