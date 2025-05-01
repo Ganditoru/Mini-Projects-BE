@@ -14,8 +14,8 @@ using Npgsql;
 using MiniProject.Modules.Events.Application.Abstractions.Data;
 using MiniProject.Modules.Events.Infrastructure.Data;
 using MiniProject.Modules.Users.Presentation.Notifications;
-using MiniProject.Modules.Users.PublicAPI;
 using MiniProject.Modules.Users.Infrastructure.PublicApi;
+using MiniProject.Common.Messaging.Contracts.User;
 
 namespace MiniProject.Modules.Users.Infrastructure;
 public static class UsersModule

@@ -7,9 +7,9 @@
 		<PackageReference Include="MediatR" Version="12.4.1" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\Common\MiniProject.Common.Messaging.Contracts\MiniProject.Common.Messaging.Contracts.csproj" />
 		<ProjectReference Include="..\MiniProject.Modules.Users.Application\MiniProject.Modules.Users.Application.csproj" />
 		<ProjectReference Include="..\MiniProject.Modules.Users.Presentation\MiniProject.Modules.Users.Presentation.csproj" />
-		<ProjectReference Include="..\MiniProject.Modules.Users.PublicAPI\MiniProject.Modules.Users.PublicAPI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Database\Migrations\" />

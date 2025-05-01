@@ -2,9 +2,7 @@
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MiniProject.Modules.Users.PublicAPI;
 
 namespace MiniProject.Modules.Attendances.Infrastructure;
 

@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Users\MiniProject.Modules.Users.PublicAPI\MiniProject.Modules.Users.PublicAPI.csproj" />
+    <ProjectReference Include="..\..\..\Common\MiniProject.Common.Messaging.Contracts\MiniProject.Common.Messaging.Contracts.csproj" />
   </ItemGroup>
 
 </Project>
