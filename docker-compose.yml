@@ -10,6 +10,12 @@ services:
     ports:
       - 5000:8080
       - 5001:8081
+    depends_on:
+      - miniproject.rabbitmq   
+    environment:
+      RabbitMQ__Host: miniproject.rabbitmq      
+      RabbitMQ__Username: guest  
+      RabbitMQ__Password: guest
 
   miniproject.database:
     image: postgres:latest
@@ -23,3 +29,12 @@ services:
     ports:
       - 5433:5433
 
+  miniproject.rabbitmq:
+    image: rabbitmq:3-management            
+    container_name: MiniProject.RabbitMQ    
+    ports:
+      - "5672:5672"   
+      - "15672:15672" 
+    environment:
+      RABBITMQ_DEFAULT_USER: guest     
+      RABBITMQ_DEFAULT_PASS: guest         

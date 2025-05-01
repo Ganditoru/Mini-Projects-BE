@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using MiniProject.Modules.Users.Application.Users.GetUser;
 using MiniProject.Modules.Users.Application.Users;
-using MiniProject.Modules.Users.PublicAPI;
+using MiniProject.Common.Messaging.Contracts.User;
 
 namespace MiniProject.Modules.Users.Infrastructure.PublicApi;
 internal sealed class UserApi(ISender sender) : IUserApi

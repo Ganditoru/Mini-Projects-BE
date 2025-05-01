@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MiniProject.Modules.Users.PublicAPI;
+using MiniProject.Common.Messaging.Contracts.User;
 
 namespace MiniProject.Modules.Attendances.Presentation.Attendances;
 
