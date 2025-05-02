@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="EFCore.NamingConventions" Version="9.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MiniProject.Modules.Ticketing.Application\MiniProject.Modules.Ticketing.Application.csproj" />
+    <ProjectReference Include="..\MiniProject.Modules.Ticketing.Presentation\MiniProject.Modules.Ticketing.Presentation.csproj" />
+  </ItemGroup>
+
 </Project>

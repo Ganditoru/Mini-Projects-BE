@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using MiniProject.Modules.Ticketing.Presentation.Customers;
 
 namespace MiniProject.Api.Extensions;
 
@@ -6,9 +7,7 @@ internal static class MessagingExtensions
 {
     public static IServiceCollection AddRabbitMqMessaging(
              this IServiceCollection services,
-             IConfiguration configuration,
-             Action<IBusRegistrationConfigurator>? register = null,
-             Action<IRabbitMqBusFactoryConfigurator, IBusRegistrationContext>? configureEndpoints = null)
+             IConfiguration configuration)
     {
         string host = configuration["RabbitMQ:Host"]!;
         string user = configuration["RabbitMQ:Username"]!;
@@ -17,7 +16,7 @@ internal static class MessagingExtensions
         services.AddMassTransit(x =>
         {
             // 1) let the caller register their consumers, sagas, etc.
-            register?.Invoke(x);
+            x.AddConsumer<UserRegisteredIntegrationEventConsumer>();
 
             // 2) configure the transport
             x.UsingRabbitMq((context, cfg) =>
@@ -29,7 +28,15 @@ internal static class MessagingExtensions
                 });
 
                 // 3) let the caller declare their queues/endpoints
-                configureEndpoints?.Invoke(cfg, context);
+                cfg.ReceiveEndpoint("ticketing.user-registered", e =>
+                {
+                    e.Durable = true;
+                    e.AutoDelete = false;
+                    e.PrefetchCount = 16;
+                    e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
+
+                    e.ConfigureConsumer<UserRegisteredIntegrationEventConsumer>(context);
+                });
             });
         });
 

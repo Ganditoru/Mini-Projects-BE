@@ -1,4 +1,4 @@
-﻿namespace MiniProject.Common.Messaging.Contracts.Abstract.EventBus;
+﻿namespace MiniProject.Common.Messaging.Contracts.Abstract.Messaging;
 
 public interface IIntegrationEvent
 {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiniProject.Modules.Users.Infrastructure.Database;
 using MiniProject.Modules.Events.Infrastructure.Database;
+using MiniProject.Modules.Ticketing.Infrastructure.Database;
 
 namespace MiniProject.Api.Extensions;
 
@@ -12,6 +13,7 @@ internal static class MigrationExtensions
 
         ApplyMigration<UserDbContext>(scope);
         ApplyMigration<EventsDbContext>(scope);
+        ApplyMigration<TicketingDbContext>(scope);
     }
 
     public static void ApplyMigration<TDbContext>(IServiceScope scope)

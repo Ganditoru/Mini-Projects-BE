@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\MiniProject.Common.Messaging.Contracts\MiniProject.Common.Messaging.Contracts.csproj" />
+    <ProjectReference Include="..\MiniProject.Modules.Ticketing.Application\MiniProject.Modules.Ticketing.Application.csproj" />
+  </ItemGroup>
+
 </Project>

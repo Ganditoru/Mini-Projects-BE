@@ -16,6 +16,8 @@ using MiniProject.Modules.Events.Infrastructure.Data;
 using MiniProject.Modules.Users.Presentation.Notifications;
 using MiniProject.Modules.Users.Infrastructure.PublicApi;
 using MiniProject.Common.Messaging.Contracts.User;
+using MiniProject.Common.Messaging.Contracts.Abstract.Messaging;
+using MiniProject.Modules.Users.Infrastructure.Messaging;
 
 namespace MiniProject.Modules.Users.Infrastructure;
 public static class UsersModule
@@ -37,6 +39,8 @@ public static class UsersModule
         });
 
         services.AddValidatorsFromAssembly(Application.AssemblyReference.Assembly, includeInternalTypes: true);
+
+        services.AddSingleton<IEventBus, EventBus>();
 
         services.AddInfrastructure(configuration);
         return services;

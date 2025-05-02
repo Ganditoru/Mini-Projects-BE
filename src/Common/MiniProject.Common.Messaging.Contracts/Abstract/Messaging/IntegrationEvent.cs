@@ -1,5 +1,4 @@
-﻿namespace Evently.Common.Application.EventBus;
-
+﻿namespace MiniProject.Common.Messaging.Contracts.Abstract.Messaging;
 public abstract class IntegrationEvent : IIntegrationEvent
 {
     protected IntegrationEvent(Guid id, DateTime occurredOnUtc)
