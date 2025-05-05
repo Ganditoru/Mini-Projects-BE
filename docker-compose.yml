@@ -5,14 +5,34 @@ services:
     image: ${DOCKER_REGISTRY-}miniprojectapi
     container_name: MiniProject-BE.Api
     build:
-      context: src
-      dockerfile: API/MiniProject.Api/MiniProject.Api/Dockerfile
+      context: src/API/MiniProject.Api/MiniProject.Api
+      dockerfile: Dockerfile
     ports:
-      - 5000:8080
-      - 5001:8081
+      - 5021:5021
+      - 5022:5022
+      - 5023:5023
     depends_on:
       - miniproject.rabbitmq   
     environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:5022;http://+:5023;https://+:5021
+      RabbitMQ__Host: miniproject.rabbitmq      
+      RabbitMQ__Username: guest  
+      RabbitMQ__Password: guest
+
+  miniproject.api2:
+    image: ${DOCKER_REGISTRY-}miniprojectapi
+    container_name: MiniProject-BE-2.Api
+    build:
+      context: src/API/MiniProject.Api2
+      dockerfile: Dockerfile
+    ports:
+      - 5025:5025
+    depends_on:
+      - miniproject.rabbitmq   
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:5025
       RabbitMQ__Host: miniproject.rabbitmq      
       RabbitMQ__Username: guest  
       RabbitMQ__Password: guest

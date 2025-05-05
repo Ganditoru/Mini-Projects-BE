@@ -18,6 +18,9 @@ using MiniProject.Modules.Users.Infrastructure.PublicApi;
 using MiniProject.Common.Messaging.Contracts.User;
 using MiniProject.Common.Messaging.Contracts.Abstract.Messaging;
 using MiniProject.Modules.Users.Infrastructure.Messaging;
+using MiniProject.Modules.Users.Presentation.gRPC;
+using Microsoft.AspNetCore.Builder;
+using MiniProject.Modules.Users.PublicApi;
 
 namespace MiniProject.Modules.Users.Infrastructure;
 public static class UsersModule
@@ -27,6 +30,7 @@ public static class UsersModule
     {
         UserEndpoints.MapEndpoints(app);
         NotificationEndpoints.MapEndpoints(app);
+        app.MapGrpcService<UserGrpcService>();
     }
 
     public static IServiceCollection AddUsersModule(
@@ -63,9 +67,11 @@ public static class UsersModule
                 .UseSnakeCaseNamingConvention());
 
         services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IUserApi, UserApi>();
+        services.AddScoped<IUserPublicApi, UserApi>();
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<UserDbContext>());
 
+        services.AddGrpc();
+        services.AddScoped<UserGrpcService>();
     }
 }

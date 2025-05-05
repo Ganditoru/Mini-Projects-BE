@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\MiniProject.Common.Messaging.Contracts\MiniProject.Common.Messaging.Contracts.csproj" />
-    <ProjectReference Include="..\..\..\Modules\Attendance\MiniProject.Modules.Attendances.Infrastructure\MiniProject.Modules.Attendances.Infrastructure.csproj" />
     <ProjectReference Include="..\..\..\Modules\Events\MiniProject.Modules.Events.Infrastructure\MiniProject.Modules.Events.Infrastructure.csproj" />
     <ProjectReference Include="..\..\..\Modules\Ticketing\MiniProject.Modules.Ticketing.Infrastructure\MiniProject.Modules.Ticketing.Infrastructure.csproj" />
     <ProjectReference Include="..\..\..\Modules\Users\MiniProject.Modules.Users.Infrastructure\MiniProject.Modules.Users.Infrastructure.csproj" />

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+// C# namespace for the generated types—replace with your actual root namespace
+option csharp_namespace = "MiniProjects.Common.Messaging.Contracts.gRPC"; 
+package user;
+
+// Request message: pass the user’s GUID as a string
+message GetUserRequest {
+  string userId = 1;
+}
+
+// Reply message: data you want back
+message GetUserResponse {
+  string userId   = 1;
+  string email    = 2;
+  string name = 3;
+  string userName = 4;
+}
+
+// The service definition
+service UserService {
+  // Unary RPC: client sends GetUserRequest, server replies with GetUserResponse
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+}
