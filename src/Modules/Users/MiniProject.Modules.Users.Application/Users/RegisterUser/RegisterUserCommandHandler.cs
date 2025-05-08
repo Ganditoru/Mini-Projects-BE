@@ -1,7 +1,7 @@
 ﻿
 using MediatR;
 using MiniProject.Common.Messaging.Contracts.Abstract.Messaging;
-using MiniProject.Common.Messaging.Contracts.User;
+using MiniProject.Common.Messaging.Contracts.IntegrationEvents;
 using MiniProject.Modules.Users.Application.Abstraction;
 using MiniProject.Modules.Users.Domain.Users;
 

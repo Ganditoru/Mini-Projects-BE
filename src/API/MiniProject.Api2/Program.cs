@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using MiniProject.Api2.Extensions;
 using MiniProject.Modules.Attendances.Infrastructure;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -17,11 +18,15 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAttendanceModule(builder.Configuration);
 
+builder.Services.AddRabbitMqMessaging(builder.Configuration);
+
 WebApplication app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.ApplyMigrations();
 }
 
 app.UseHttpsRedirection();

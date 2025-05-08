@@ -42,9 +42,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniProject.Modules.Users.P
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Attendance", "Attendance", "{3487B37A-057E-49AD-8A5B-F4C70DF49361}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniProject.Modules.Attendances.Infrastructure", "src\Modules\Attendance\MiniProject.Modules.Attendances.Infrastructure\MiniProject.Modules.Attendances.Infrastructure.csproj", "{DE226CFE-A5C1-499D-B795-5FA3221886CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniProject.Modules.Attendance.Infrastructure", "src\Modules\Attendance\MiniProject.Modules.Attendances.Infrastructure\MiniProject.Modules.Attendance.Infrastructure.csproj", "{DE226CFE-A5C1-499D-B795-5FA3221886CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniProject.Modules.Attendances.Presentation", "src\Modules\Attendance\MiniProject.Modules.Attendances.Presentation\MiniProject.Modules.Attendances.Presentation.csproj", "{8E3BD3EC-11CA-4F6D-B7D7-A5B39D0BEE72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniProject.Modules.Attendance.Presentation", "src\Modules\Attendance\MiniProject.Modules.Attendances.Presentation\MiniProject.Modules.Attendance.Presentation.csproj", "{8E3BD3EC-11CA-4F6D-B7D7-A5B39D0BEE72}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ticketing", "Ticketing", "{686F797D-D825-456F-B15A-D9E6AA8DE04E}"
 EndProject
@@ -63,6 +63,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniProject.Api2", "src\API\MiniProject.Api2\MiniProject.Api2.csproj", "{6F62EB19-1812-4C52-814D-AFF6835C15D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniProject.Modules.Users.PublicApi", "src\Modules\Users\MiniProject.Modules.Users.PublicApi\MiniProject.Modules.Users.PublicApi.csproj", "{376BC21D-61CF-433C-A0F6-3615D7400386}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniProject.Modules.Attendance.Domain", "src\Modules\Attendance\MiniProject.Modules.Attendance.Domain\MiniProject.Modules.Attendance.Domain.csproj", "{83A5D212-6431-4874-BE06-9EA027738CA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniProject.Modules.Attendance.Application", "src\Modules\Attendance\MiniProject.Modules.Attendance.Application\MiniProject.Modules.Attendance.Application.csproj", "{69BF524E-BBFD-4610-AFAC-8722C90F855F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -146,6 +150,14 @@ Global
 		{376BC21D-61CF-433C-A0F6-3615D7400386}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{376BC21D-61CF-433C-A0F6-3615D7400386}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{376BC21D-61CF-433C-A0F6-3615D7400386}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83A5D212-6431-4874-BE06-9EA027738CA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83A5D212-6431-4874-BE06-9EA027738CA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83A5D212-6431-4874-BE06-9EA027738CA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83A5D212-6431-4874-BE06-9EA027738CA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69BF524E-BBFD-4610-AFAC-8722C90F855F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69BF524E-BBFD-4610-AFAC-8722C90F855F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69BF524E-BBFD-4610-AFAC-8722C90F855F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69BF524E-BBFD-4610-AFAC-8722C90F855F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +188,8 @@ Global
 		{72B23EDC-18FD-4A9C-9A56-B55ECB3A6103} = {D8B712EE-2002-46EA-A2E7-42F1319E7F8E}
 		{6F62EB19-1812-4C52-814D-AFF6835C15D7} = {99E75EC1-2081-4195-9684-479470C2C1CC}
 		{376BC21D-61CF-433C-A0F6-3615D7400386} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{83A5D212-6431-4874-BE06-9EA027738CA6} = {3487B37A-057E-49AD-8A5B-F4C70DF49361}
+		{69BF524E-BBFD-4610-AFAC-8722C90F855F} = {3487B37A-057E-49AD-8A5B-F4C70DF49361}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5DD73D5D-6FF7-4CF9-853A-F145507E7D77}

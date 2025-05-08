@@ -15,7 +15,6 @@ using MiniProject.Modules.Events.Application.Abstractions.Data;
 using MiniProject.Modules.Events.Infrastructure.Data;
 using MiniProject.Modules.Users.Presentation.Notifications;
 using MiniProject.Modules.Users.Infrastructure.PublicApi;
-using MiniProject.Common.Messaging.Contracts.User;
 using MiniProject.Common.Messaging.Contracts.Abstract.Messaging;
 using MiniProject.Modules.Users.Infrastructure.Messaging;
 using MiniProject.Modules.Users.Presentation.gRPC;

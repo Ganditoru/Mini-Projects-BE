@@ -8,7 +8,7 @@ internal sealed class CreateCustomerCommandHandler(ICustomerRepository customerR
 {
     public async Task<Guid> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
-        var customer = Customer.Create(request.CustomerId, request.Email, request.FirstName, request.LastName);
+        var customer = Customer.Create(request.CustomerId, request.Email, request.Name);
         customerRepository.Insert(customer);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);

@@ -1,8 +1,7 @@
-﻿using Grpc.Core;
-using Microsoft.AspNetCore.Mvc;
-using MiniProject.Common.Messaging.Contracts.User;
-using MiniProjects.Common.Messaging.Contracts.gRPC;
-
+﻿using Microsoft.AspNetCore.Mvc;
+using MiniProject.Common.Messaging.Contracts.Dto;
+using MiniProject.Common.Messaging.Contracts.gRPC;
+using MiniProject.Common.Messaging.Contracts.Http;
 namespace MiniProject.Modules.Attendances.Presentation.Attendances;
 
 [ApiController]
@@ -10,7 +9,7 @@ namespace MiniProject.Modules.Attendances.Presentation.Attendances;
 public class AttendanceController(IHttpUsersApi httpUserApi, IGrpcUserApi grpcUserApi) : ControllerBase
 {
 
-    [HttpGet("gRPC/{id}")]
+    [HttpGet("users/gRPC/{id}")]
     public async Task<IActionResult> GetAttendanceViaGRPC(Guid id)
     {
         CommonUserResponse? user = await grpcUserApi.GetUserAsync(id);
@@ -18,7 +17,7 @@ public class AttendanceController(IHttpUsersApi httpUserApi, IGrpcUserApi grpcUs
         return Ok(user);
     }
 
-    [HttpGet("http")]
+    [HttpGet("users/http")]
     public async Task<IActionResult> GetAttendance()
     {
         IEnumerable<CommonUserResponse> users = await httpUserApi.GetUsersAsync();

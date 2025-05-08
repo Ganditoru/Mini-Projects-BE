@@ -1,4 +1,6 @@
-﻿namespace MiniProject.Common.Messaging.Contracts.User;
+﻿using MiniProject.Common.Messaging.Contracts.Dto;
+
+namespace MiniProject.Common.Messaging.Contracts.Http;
 
 public interface IHttpUsersApi
 {

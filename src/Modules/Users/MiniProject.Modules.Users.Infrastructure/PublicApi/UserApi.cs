@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using MiniProject.Modules.Users.Application.Users.GetUser;
 using MiniProject.Modules.Users.Application.Users;
-using MiniProject.Common.Messaging.Contracts.User;
 using MiniProject.Modules.Users.PublicApi;
-using MiniProject.Modules.Users.Domain.Users;
 using MiniProject.Modules.Users.Application.Users.GetUsers;
 
 namespace MiniProject.Modules.Users.Infrastructure.PublicApi;

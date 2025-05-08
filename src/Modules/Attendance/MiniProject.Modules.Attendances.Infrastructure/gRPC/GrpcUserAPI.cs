@@ -1,5 +1,6 @@
 ﻿using Grpc.Core;
-using MiniProject.Common.Messaging.Contracts.User;
+using MiniProject.Common.Messaging.Contracts.Dto;
+using MiniProject.Common.Messaging.Contracts.gRPC;
 using MiniProjects.Common.Messaging.Contracts.gRPC;
 
 namespace MiniProject.Modules.Attendances.Infrastructure.gRPC;

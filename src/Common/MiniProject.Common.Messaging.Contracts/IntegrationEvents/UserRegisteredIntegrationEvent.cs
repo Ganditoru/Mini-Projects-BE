@@ -1,6 +1,6 @@
 ﻿using MiniProject.Common.Messaging.Contracts.Abstract.Messaging;
 
-namespace MiniProject.Common.Messaging.Contracts.User;
+namespace MiniProject.Common.Messaging.Contracts.IntegrationEvents;
 
 public sealed class UserRegisteredIntegrationEvent : IntegrationEvent
 {

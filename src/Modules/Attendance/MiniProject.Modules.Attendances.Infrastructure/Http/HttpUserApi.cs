@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Json;
-using MiniProject.Common.Messaging.Contracts.User;
+using MiniProject.Common.Messaging.Contracts.Dto;
+using MiniProject.Common.Messaging.Contracts.Http;
 
 namespace MiniProject.Modules.Attendances.Infrastructure.Http;
 public class HttpUserApi(HttpClient http) : IHttpUsersApi

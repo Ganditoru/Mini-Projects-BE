@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using MiniProject.Modules.Ticketing.Domain.Customers;
 using MiniProject.Modules.Ticketing.Infrastructure.Customers;
 using MiniProject.Modules.Ticketing.Application.Abstract;
+using MiniProject.Modules.Ticketing.Infrastructure.Abstract;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Npgsql;
 
 namespace MiniProject.Modules.Ticketing.Infrastructure;
 
@@ -27,13 +30,22 @@ public static class TicketingModule
 
     private static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        string databaseConnectionString = configuration.GetConnectionString("Database");
+
+        NpgsqlDataSource npgsqlDataSource = new NpgsqlDataSourceBuilder(databaseConnectionString).Build();
+        services.TryAddSingleton(npgsqlDataSource);
+
+        services.TryAddScoped<IDbConnectionFactory, DbConnectionFactory>();
+        services.TryAddSingleton<PublishDomainEventsInterceptor>();
+
         services.AddDbContext<TicketingDbContext>((sp, options) =>
             options
                 .UseNpgsql(
                     configuration.GetConnectionString("Database"),
                     npgsqlOptions => npgsqlOptions
                         .MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Ticketing))
-                .UseSnakeCaseNamingConvention());
+                .UseSnakeCaseNamingConvention()
+                .AddInterceptors(sp.GetRequiredService<PublishDomainEventsInterceptor>()));
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
 
