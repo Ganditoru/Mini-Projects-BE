@@ -2,7 +2,7 @@
 using MiniProject.Modules.Events.Application.Abstractions.Data;
 using Npgsql;
 
-namespace MiniProject.Modules.Events.Infrastructure.Data;
+namespace MiniProject.Modules.Users.Infrastructure.Abstract.Data;
 internal sealed class DbConnectionFactory(NpgsqlDataSource dataSource) : IDbConnectionFactory
 {
 

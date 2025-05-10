@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MiniProject.Modules.Users.Infrastructure.Database;
 using MiniProject.Modules.Events.Infrastructure.Database;
 using MiniProject.Modules.Ticketing.Infrastructure.Database;
+using MiniProject.Modules.Users.Infrastructure.Database;
 
 namespace MiniProject.Api.Extensions;
 

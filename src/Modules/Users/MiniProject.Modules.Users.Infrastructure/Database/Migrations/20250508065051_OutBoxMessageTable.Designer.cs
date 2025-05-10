@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MiniProject.Modules.Users.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20250429055328_CreateUserDatabase")]
-    partial class CreateUserDatabase
+    [Migration("20250508065051_OutBoxMessageTable")]
+    partial class OutBoxMessageTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -90,6 +90,42 @@ namespace MiniProject.Modules.Users.Infrastructure.Database.Migrations
                         .HasName("pk_users");
 
                     b.ToTable("users", "user2");
+                });
+
+            modelBuilder.Entity("MiniProject.Modules.Users.Infrastructure.Abstract.Outbox.OutboxMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("jsonb")
+                        .HasColumnName("content");
+
+                    b.Property<string>("Error")
+                        .HasColumnType("text")
+                        .HasColumnName("error");
+
+                    b.Property<DateTime>("OccurredOnUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("occurred_on_utc");
+
+                    b.Property<DateTime?>("ProcessedOnUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("processed_on_utc");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("type");
+
+                    b.HasKey("Id")
+                        .HasName("pk_outbox_messages");
+
+                    b.ToTable("outbox_messages", "user2");
                 });
 
             modelBuilder.Entity("MiniProject.Modules.Users.Domain.Notifications.Notification", b =>

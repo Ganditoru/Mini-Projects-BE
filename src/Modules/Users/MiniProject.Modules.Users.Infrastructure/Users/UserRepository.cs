@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MiniProject.Modules.Users.Domain.Users;
 using MiniProject.Modules.Users.Infrastructure.Database;
 
-namespace MiniProject.Modules.Users.Infrastructure.Users;
+namespace MiniProject.Modules.Users.DomaInfrastructurein.Users;
 internal sealed class UserRepository(UserDbContext context) : IUserRepository
 {
     public User? FindById(Guid id)

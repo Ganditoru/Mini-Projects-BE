@@ -9,6 +9,7 @@ using MiniProject.Modules.Ticketing.Application.Abstract;
 using MiniProject.Modules.Ticketing.Infrastructure.Abstract;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Npgsql;
+using MiniProject.Modules.Ticketing.Infrastructure.Abstract.DbInterceptor;
 
 namespace MiniProject.Modules.Ticketing.Infrastructure;
 

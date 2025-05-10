@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using MiniProject.Modules.Ticketing.Domain.Abstract;
 
-namespace MiniProject.Modules.Ticketing.Infrastructure.Abstract;
+namespace MiniProject.Modules.Ticketing.Infrastructure.Abstract.DbInterceptor;
 public sealed class PublishDomainEventsInterceptor(IServiceScopeFactory serviceScopeFactory) : SaveChangesInterceptor
 {
     public override async ValueTask<int> SavedChangesAsync(

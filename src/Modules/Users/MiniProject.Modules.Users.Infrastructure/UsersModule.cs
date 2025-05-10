@@ -6,20 +6,23 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MiniProject.Modules.Users.Application.Abstraction;
 using MiniProject.Modules.Users.Domain.Users;
-using MiniProject.Modules.Users.Infrastructure.Database;
-using MiniProject.Modules.Users.Infrastructure.Users;
 using MiniProject.Modules.Users.Presentation.Users;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Npgsql;
 using MiniProject.Modules.Events.Application.Abstractions.Data;
-using MiniProject.Modules.Events.Infrastructure.Data;
 using MiniProject.Modules.Users.Presentation.Notifications;
-using MiniProject.Modules.Users.Infrastructure.PublicApi;
 using MiniProject.Common.Messaging.Contracts.Abstract.Messaging;
-using MiniProject.Modules.Users.Infrastructure.Messaging;
 using MiniProject.Modules.Users.Presentation.gRPC;
 using Microsoft.AspNetCore.Builder;
 using MiniProject.Modules.Users.PublicApi;
+using MiniProject.Modules.Users.Domain.Outbox;
+using MiniProject.Modules.Users.Infrastructure.Database;
+using MiniProject.Modules.Users.Infrastructure.Abstract.Messaging;
+using MiniProject.Modules.Users.Infrastructure.Abstract.Data;
+using MiniProject.Modules.Users.DomaInfrastructurein.Users;
+using MiniProject.Modules.Users.Infrastructure.Outbox;
+using MiniProject.Modules.Users.Infrastructure.PublicApi;
+using Quartz;
 
 namespace MiniProject.Modules.Users.Infrastructure;
 public static class UsersModule
@@ -66,9 +69,17 @@ public static class UsersModule
                 .UseSnakeCaseNamingConvention());
 
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IOutboxMessageRepository, OutboxMessageRepository>();
         services.AddScoped<IUserPublicApi, UserApi>();
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<UserDbContext>());
+
+        services.AddQuartz();
+        services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
+
+        services.Configure<OutboxOptions>(configuration.GetSection("Users:Outbox"));
+        services.ConfigureOptions<ConfigureProcessOutboxJob>();
+
 
         services.AddGrpc();
         services.AddScoped<UserGrpcService>();
