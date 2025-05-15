@@ -1,4 +1,6 @@
 ﻿using MassTransit;
+using MiniProject.Common.Messaging.Contracts.IntegrationEvents;
+using MiniProject.Modules.Attendance.Infrastructure.Abstract.Inbox;
 using MiniProject.Modules.Attendance.Presentation.Attendances;
 
 namespace MiniProject.Api2.Extensions;
@@ -16,7 +18,7 @@ internal static class MessagingExtensions
         services.AddMassTransit(x =>
         {
             // 1) let the caller register their consumers, sagas, etc.
-            x.AddConsumer<CreateCustomerIntegrationEventConsumer>();
+            x.AddConsumer<IntegrationEventConsumer<CreateCustomerIntegrationEvent>>();
 
             // 2) configure the transport
             x.UsingRabbitMq((context, cfg) =>
@@ -35,7 +37,7 @@ internal static class MessagingExtensions
                     e.PrefetchCount = 16;
                     e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
 
-                    e.ConfigureConsumer<CreateCustomerIntegrationEventConsumer>(context);
+                    e.ConfigureConsumer<IntegrationEventConsumer<CreateCustomerIntegrationEvent>>(context);
                 });
             });
         });

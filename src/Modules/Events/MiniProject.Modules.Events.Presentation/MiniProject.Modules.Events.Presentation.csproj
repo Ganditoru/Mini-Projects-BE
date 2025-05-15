@@ -6,6 +6,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\Common\MiniProject.Common.Messaging.Contracts\MiniProject.Common.Messaging.Contracts.csproj" />
 		<ProjectReference Include="..\..\Users\MiniProject.Modules.Users.PublicApi\MiniProject.Modules.Users.PublicApi.csproj" />
 		<ProjectReference Include="..\MiniProject.Modules.Events.Application\MiniProject.Modules.Events.Application.csproj" />
 		<ProjectReference Include="..\MiniProject.Modules.Events.Domain\MiniProject.Modules.Events.Domain.csproj" />

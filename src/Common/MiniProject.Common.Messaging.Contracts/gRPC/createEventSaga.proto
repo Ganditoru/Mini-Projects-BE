@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+option csharp_namespace = "MiniProjects.Common.Messaging.Contracts.gRPC"; 
+package createEventSaga;
+
+import "google/protobuf/timestamp.proto"; // for DateTime fields
+
+message SagaContext {
+  // Unique identifier for this saga instance (idempotency & tracing)
+  string correlation_id = 1;
+}
+
+// Request to create an Event in the Event module
+message CreateEventRequest {
+  SagaContext ctx           = 1;
+  string id					= 2;
+  string categoryId			= 3;
+  string title              = 4;
+  string description        = 5;
+  string location           = 6;
+  google.protobuf.Timestamp starts_at_utc = 7;
+  google.protobuf.Timestamp ends_at_utc   = 8;
+}
+
+// Response from CreateEvent
+message CreateEventResponse {
+  bool success   = 1; 
+  string event_id = 2; 
+}
+
+// Request to compensate (delete) an Event in the Event module
+message CompensateEventRequest {
+  SagaContext ctx    = 1;  
+  string event_id    = 2;      
+}
+
+// Response from CompensateEvent
+message CompensateEventResponse {
+  bool success = 1;         
+}
+
+// gRPC service hosted by Module Event
+service CreateEventEventModuleService {
+  rpc CreateEvent(CreateEventRequest) returns (CreateEventResponse);
+  rpc CompensateEvent(CompensateEventRequest) returns (CompensateEventResponse);
+}
+
+// gRPC service hosted by Module Attendance
+service CreateEventAttendanceModuleService {
+  rpc CreateEvent     (CreateEventRequest)     returns (CreateEventResponse);
+  rpc CompensateEvent (CompensateEventRequest) returns (CompensateEventResponse);
+}
+

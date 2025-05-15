@@ -5,7 +5,7 @@ using MiniProjects.Common.Messaging.Contracts.gRPC;
 using MediatR;
 
 namespace MiniProject.Modules.Users.Presentation.gRPC;
-public class UserGrpcService(ISender sender) : UserService.UserServiceBase
+public sealed class UserGrpcService(ISender sender) : UserService.UserServiceBase
 {
     public override async Task<GetUserResponse> GetUser(
         GetUserRequest request, ServerCallContext context)

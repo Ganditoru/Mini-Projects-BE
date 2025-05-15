@@ -28,11 +28,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - 5025:5025
+      - 5026:5026
     depends_on:
       - miniproject.rabbitmq   
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: https://+:5025
+      ASPNETCORE_URLS: https://+:5025;http://+:5026
       RabbitMQ__Host: miniproject.rabbitmq      
       RabbitMQ__Username: guest  
       RabbitMQ__Password: guest

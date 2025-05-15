@@ -14,9 +14,11 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Directory.Build.props", "."]
 COPY ["src/API/MiniProject.Api2/MiniProject.Api2.csproj", "src/API/MiniProject.Api2/"]
-COPY ["src/Modules/Attendance/MiniProject.Modules.Attendances.Infrastructure/MiniProject.Modules.Attendances.Infrastructure.csproj", "src/Modules/Attendance/MiniProject.Modules.Attendances.Infrastructure/"]
-COPY ["src/Modules/Attendance/MiniProject.Modules.Attendances.Presentation/MiniProject.Modules.Attendances.Presentation.csproj", "src/Modules/Attendance/MiniProject.Modules.Attendances.Presentation/"]
+COPY ["src/Modules/Attendance/MiniProject.Modules.Attendances.Infrastructure/MiniProject.Modules.Attendance.Infrastructure.csproj", "src/Modules/Attendance/MiniProject.Modules.Attendances.Infrastructure/"]
+COPY ["src/Modules/Attendance/MiniProject.Modules.Attendance.Application/MiniProject.Modules.Attendance.Application.csproj", "src/Modules/Attendance/MiniProject.Modules.Attendance.Application/"]
 COPY ["src/Common/MiniProject.Common.Messaging.Contracts/MiniProject.Common.Messaging.Contracts.csproj", "src/Common/MiniProject.Common.Messaging.Contracts/"]
+COPY ["src/Modules/Attendance/MiniProject.Modules.Attendance.Domain/MiniProject.Modules.Attendance.Domain.csproj", "src/Modules/Attendance/MiniProject.Modules.Attendance.Domain/"]
+COPY ["src/Modules/Attendance/MiniProject.Modules.Attendances.Presentation/MiniProject.Modules.Attendance.Presentation.csproj", "src/Modules/Attendance/MiniProject.Modules.Attendances.Presentation/"]
 RUN dotnet restore "./src/API/MiniProject.Api2/MiniProject.Api2.csproj"
 COPY . .
 WORKDIR "/src/src/API/MiniProject.Api2"

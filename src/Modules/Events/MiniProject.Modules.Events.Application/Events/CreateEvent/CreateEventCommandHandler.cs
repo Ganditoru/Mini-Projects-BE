@@ -7,7 +7,7 @@ using MiniProject.Modules.Events.Domain.Events;
 
 namespace MiniProject.Modules.Events.Application.Events.CreateEvent;
 
-public sealed class CreateEventCommandHandler(
+internal sealed class CreateEventCommandHandler(
     ICategoryRepository categoryRepository,
     IEventRepository eventRepository,
     IUnitOfWork unitOfWork) : IRequestHandler<CreateEventCommand, Result<Guid>>

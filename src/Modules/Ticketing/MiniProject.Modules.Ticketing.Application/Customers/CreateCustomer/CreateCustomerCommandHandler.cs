@@ -2,7 +2,7 @@
 using MiniProject.Modules.Ticketing.Application.Abstract;
 using MiniProject.Modules.Ticketing.Domain.Customers;
 
-namespace MiniProject.Modules.Ticketing.Application.Customers;
+namespace MiniProject.Modules.Ticketing.Application.Customers.CreateCustomer;
 
 internal sealed class CreateCustomerCommandHandler(ICustomerRepository customerRepository, IUnitOfWork unitOfWork) : IRequestHandler<CreateCustomerCommand, Guid>
 {

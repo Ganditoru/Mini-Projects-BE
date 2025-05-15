@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\MiniProject.Common.Messaging.Contracts\MiniProject.Common.Messaging.Contracts.csproj" />
     <ProjectReference Include="..\MiniProject.Modules.Attendance.Domain\MiniProject.Modules.Attendance.Domain.csproj" />
   </ItemGroup>
 

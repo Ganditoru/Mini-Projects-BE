@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using System.Threading;
+using Google.Protobuf.WellKnownTypes;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MiniProject.Modules.Events.Application.Events.CancelEvent;
@@ -11,12 +13,14 @@ using MiniProject.Modules.Events.Domain.Abstractions;
 using MiniProject.Modules.Events.Presentation.Abstraction;
 using MiniProject.Modules.Events.Presentation.RequestDTOs;
 using MiniProject.Modules.Events.Presentation.RequestDTOs.Events;
+using MiniProject.Modules.Events.Presentation.Saga;
+using MiniProjects.Common.Messaging.Contracts.gRPC;
 
 namespace MiniProject.Modules.Events.Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class EventsController(ISender sender) : ControllerBase
+public class EventsController(ISender sender, CreateEventSagaOrchestrator createEventSagaOrchestrator) : ControllerBase
 {
 
     [HttpGet("IResult/{id}")]
@@ -44,6 +48,34 @@ public class EventsController(ISender sender) : ControllerBase
         Result<IReadOnlyCollection<Application.Events.GetEvents.EventResponse>> result = await sender.Send(new GetEventsQuery());
 
         return result.IsSuccess ? Ok(result.Value) : ApiResults.Problem(result);
+    }
+
+    [HttpPost("Saga-Orchestrator")]
+    public async Task<IActionResult> CreateEventWithSagaOrchestrator([FromBody] CreateEventequest @event)
+    {
+        var request = new CreateEventRequest()
+        {
+            Id= Guid.NewGuid().ToString(),
+            CategoryId = @event.CategoryId.ToString(),
+            Description = @event.Description,
+            Location = @event.Location,
+            Title = @event.Title,
+            StartsAtUtc = Timestamp.FromDateTime(@event.StartsAtUtc.ToUniversalTime())
+        };
+
+        if(@event.EndsAtUtc != null)
+        {
+            request.EndsAtUtc = Timestamp.FromDateTime(@event.EndsAtUtc.Value.ToUniversalTime());
+        }
+
+        var compensateEventRequest = new CompensateEventRequest()
+        {
+            EventId = request.Id
+        };
+
+        Result<string> result = await createEventSagaOrchestrator.ExecuteSagaAsync(request!, compensateEventRequest!);
+
+        return result.IsSuccess ? Ok(result) : ApiResults.Problem(result);
     }
 
     [HttpPost("IActionResult")]

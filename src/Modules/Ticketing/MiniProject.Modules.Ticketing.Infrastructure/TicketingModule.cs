@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using MiniProject.Modules.Ticketing.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -10,7 +9,10 @@ using MiniProject.Modules.Ticketing.Infrastructure.Abstract;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Npgsql;
 using MiniProject.Modules.Ticketing.Infrastructure.Abstract.DbInterceptor;
-
+using MiniProject.Modules.Ticketing.Infrastructure.Outbox;
+using Quartz;
+using Microsoft.Extensions.DependencyInjection;
+using MiniProject.Modules.Ticketing.Application.Abstract.Messaging;
 namespace MiniProject.Modules.Ticketing.Infrastructure;
 
 public static class TicketingModule
@@ -19,12 +21,15 @@ public static class TicketingModule
     this IServiceCollection services,
     IConfiguration configuration)
     {
+
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(Application.AssemblyReference.Assembly);
         });
 
         services.AddInfrastructure(configuration);
+        services.AddDomainEventHandlers();
+
 
         return services;
     }
@@ -37,7 +42,7 @@ public static class TicketingModule
         services.TryAddSingleton(npgsqlDataSource);
 
         services.TryAddScoped<IDbConnectionFactory, DbConnectionFactory>();
-        services.TryAddSingleton<PublishDomainEventsInterceptor>();
+        services.TryAddSingleton<InsertOutboxMessagesInterceptor>();
 
         services.AddDbContext<TicketingDbContext>((sp, options) =>
             options
@@ -45,13 +50,44 @@ public static class TicketingModule
                     configuration.GetConnectionString("Database"),
                     npgsqlOptions => npgsqlOptions
                         .MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Ticketing))
+                .AddInterceptors(sp.GetRequiredService<InsertOutboxMessagesInterceptor>())
                 .UseSnakeCaseNamingConvention()
-                .AddInterceptors(sp.GetRequiredService<PublishDomainEventsInterceptor>()));
+                );
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TicketingDbContext>());
 
+        services.AddQuartz();
+        services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
+
+        services.Configure<OutboxOptions>(configuration.GetSection("Ticketing:Outbox"));
+        services.ConfigureOptions<ConfigureProcessOutboxJob>();
+
+    }
+
+    private static void AddDomainEventHandlers(this IServiceCollection services)
+    {
+        Type[] domainEventHandlers = Application.AssemblyReference.Assembly
+            .GetTypes()
+            .Where(t => t.IsAssignableTo(typeof(IDomainEventHandler)))
+            .Where(t => t.IsClass && !t.IsAbstract)
+            .ToArray();
+
+        foreach (Type domainEventHandler in domainEventHandlers)
+        {
+            services.TryAddScoped(domainEventHandler);
+
+            Type domainEvent = domainEventHandler
+                .GetInterfaces()
+                .Single(i => i.IsGenericType)
+                .GetGenericArguments()
+                .Single();
+
+            Type closedIdempotentHandler = typeof(IdempotentDomainEventHandler<>).MakeGenericType(domainEvent);
+
+            services.Decorate(domainEventHandler, closedIdempotentHandler);
+        }
     }
 
 }

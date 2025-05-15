@@ -21,7 +21,6 @@ internal sealed class RegisterUserCommandHandler(IUserRepository userRepository,
                user.Email,
                user.Name);
 
-
         var outboxMessage = new OutboxMessage()
         {
             Id = Guid.NewGuid(),

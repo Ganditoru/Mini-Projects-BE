@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using MiniProject.Api2.Extensions;
-using MiniProject.Modules.Attendances.Infrastructure;
+using MiniProject.Modules.Attendance.Infrastructure;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +10,10 @@ builder.WebHost.ConfigureKestrel(options =>
     {
         lo.UseHttps();
         lo.Protocols = HttpProtocols.Http1;
+    });
+    options.ListenAnyIP(5026, lo =>
+    {
+        lo.Protocols = HttpProtocols.Http2;
     });
 });
 
@@ -28,8 +32,6 @@ if (app.Environment.IsDevelopment())
 
     app.ApplyMigrations();
 }
-
-app.UseHttpsRedirection();
 
 AttendancesModule.MapEndpoints(app);
 

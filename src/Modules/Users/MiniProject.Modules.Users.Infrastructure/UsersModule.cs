@@ -3,17 +3,16 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Npgsql;
+using Microsoft.AspNetCore.Builder;
 using MiniProject.Modules.Users.Application.Abstraction;
 using MiniProject.Modules.Users.Domain.Users;
 using MiniProject.Modules.Users.Presentation.Users;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Npgsql;
 using MiniProject.Modules.Events.Application.Abstractions.Data;
 using MiniProject.Modules.Users.Presentation.Notifications;
 using MiniProject.Common.Messaging.Contracts.Abstract.Messaging;
 using MiniProject.Modules.Users.Presentation.gRPC;
-using Microsoft.AspNetCore.Builder;
 using MiniProject.Modules.Users.PublicApi;
 using MiniProject.Modules.Users.Domain.Outbox;
 using MiniProject.Modules.Users.Infrastructure.Database;
@@ -23,6 +22,7 @@ using MiniProject.Modules.Users.DomaInfrastructurein.Users;
 using MiniProject.Modules.Users.Infrastructure.Outbox;
 using MiniProject.Modules.Users.Infrastructure.PublicApi;
 using Quartz;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MiniProject.Modules.Users.Infrastructure;
 public static class UsersModule

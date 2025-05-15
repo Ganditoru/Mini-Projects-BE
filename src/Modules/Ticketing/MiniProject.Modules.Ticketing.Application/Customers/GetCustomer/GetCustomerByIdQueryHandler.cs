@@ -6,9 +6,9 @@ using MediatR;
 using MiniProject.Modules.Ticketing.Application.Abstract;
 
 namespace MiniProject.Modules.Ticketing.Application.Customers.GetCustomer;
-internal sealed class GetCustomerByIdQueryHandler(IDbConnectionFactory dbConnectionFactory) : IRequestHandler<GetCustomerQuery, CustomerResponse>
+internal sealed class GetCustomerByIdQueryHandler(IDbConnectionFactory dbConnectionFactory) : IRequestHandler<GetCustomerQuery, CustomerResponse?>
 {
-    public async Task<CustomerResponse> Handle(GetCustomerQuery request, CancellationToken cancellationToken)
+    public async Task<CustomerResponse?> Handle(GetCustomerQuery request, CancellationToken cancellationToken)
     {
         await using DbConnection connection = await dbConnectionFactory.OpenConnectionAsync();
 

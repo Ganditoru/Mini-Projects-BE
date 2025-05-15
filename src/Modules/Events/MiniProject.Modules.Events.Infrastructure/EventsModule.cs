@@ -19,6 +19,10 @@ using MiniProject.Modules.Events.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using FluentValidation;
 using MiniProject.Modules.Events.Infrastructure.Interceptors;
+using MiniProjects.Common.Messaging.Contracts.gRPC;
+using MiniProject.Modules.Events.Infrastructure.gRPC;
+using MiniProject.Modules.Events.Presentation.gRPC;
+using MiniProject.Modules.Events.Presentation.Saga;
 
 namespace MiniProject.Modules.Events.Infrastructure;
 
@@ -35,6 +39,9 @@ public static class EventsModule
     {
         services.AddControllersFromPresentationProject();
         services.AddMediatRHandlerAndValidation();
+
+        services.AddGrpcSettings(configuration);
+        services.AddSagaOrchestrator();
 
         services.AddInfrastructure(configuration);
         return services;
@@ -61,6 +68,59 @@ public static class EventsModule
         services.AddScoped<IEventRepository, EventRepository>();
         services.AddScoped<ITicketTypeRepository, TicketTypeRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+    }
+
+    private static void AddGrpcSettings(
+    this IServiceCollection services,
+    IConfiguration configuration)
+    {
+        string? userServiceUrl = configuration
+            .GetSection("MiniProject.API2")
+            .GetValue<string>("gRPCUrl");
+
+        AppContext.SetSwitch(
+  "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+
+        services
+            .AddGrpcClient<CreateEventAttendanceModuleService.CreateEventAttendanceModuleServiceClient>(o =>
+            {
+                o.Address = new Uri(userServiceUrl!);
+            });
+
+        services.AddScoped<IGrpcCreateEvent, GrpcCreateEvent>();
+    }
+
+    private static void AddSagaOrchestrator(
+        this IServiceCollection services)
+    {
+        services.AddScoped<CreateEventInEventModuleService>();
+        services.AddScoped<CreateEventInAttendanceModuleService>();
+
+        services.AddScoped<
+          ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse>,
+          CreateEventInEventModuleService>();
+
+        services.AddScoped<
+          ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse>,
+          CreateEventInAttendanceModuleService>();
+
+        services.AddScoped(sp =>
+        {
+            var orchestrator = new CreateEventSagaOrchestrator();
+
+            // resolve _all_ registered ISagaStep<…>
+            IEnumerable<ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse>> steps = 
+            sp.GetServices<ISagaStep<CreateEventRequest, CreateEventResponse,
+                       CompensateEventRequest, CompensateEventResponse>>();
+
+            // add them to your orchestrator
+            foreach (ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse> step in steps)
+            {
+                orchestrator.AddStep(step);
+            }
+
+            return orchestrator;
+        });
     }
 
     private static void AddDapperConnectionFActory(this IServiceCollection services, string databaseConnectionString)
