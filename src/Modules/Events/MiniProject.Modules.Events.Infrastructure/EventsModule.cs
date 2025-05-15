@@ -78,9 +78,6 @@ public static class EventsModule
             .GetSection("MiniProject.API2")
             .GetValue<string>("gRPCUrl");
 
-        AppContext.SetSwitch(
-  "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-
         services
             .AddGrpcClient<CreateEventAttendanceModuleService.CreateEventAttendanceModuleServiceClient>(o =>
             {
@@ -97,18 +94,14 @@ public static class EventsModule
         services.AddScoped<CreateEventInAttendanceModuleService>();
 
         services.AddScoped<ISagaStep, CreateEventInEventModuleService>();
-
         services.AddScoped<ISagaStep, CreateEventInAttendanceModuleService>();
 
         services.AddScoped(sp =>
         {
             var orchestrator = new CreateEventSagaOrchestrator();
 
-            // resolve _all_ registered ISagaStep<…>
-            IEnumerable<ISagaStep> steps =
-            sp.GetServices<ISagaStep>();
+            IEnumerable<ISagaStep> steps = sp.GetServices<ISagaStep>();
 
-            // add them to your orchestrator
             foreach (ISagaStep step in steps)
             {
                 orchestrator.AddStep(step);
