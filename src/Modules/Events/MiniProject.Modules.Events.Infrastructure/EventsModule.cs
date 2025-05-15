@@ -96,25 +96,20 @@ public static class EventsModule
         services.AddScoped<CreateEventInEventModuleService>();
         services.AddScoped<CreateEventInAttendanceModuleService>();
 
-        services.AddScoped<
-          ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse>,
-          CreateEventInEventModuleService>();
+        services.AddScoped<ISagaStep, CreateEventInEventModuleService>();
 
-        services.AddScoped<
-          ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse>,
-          CreateEventInAttendanceModuleService>();
+        services.AddScoped<ISagaStep, CreateEventInAttendanceModuleService>();
 
         services.AddScoped(sp =>
         {
             var orchestrator = new CreateEventSagaOrchestrator();
 
             // resolve _all_ registered ISagaStep<…>
-            IEnumerable<ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse>> steps = 
-            sp.GetServices<ISagaStep<CreateEventRequest, CreateEventResponse,
-                       CompensateEventRequest, CompensateEventResponse>>();
+            IEnumerable<ISagaStep> steps =
+            sp.GetServices<ISagaStep>();
 
             // add them to your orchestrator
-            foreach (ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse> step in steps)
+            foreach (ISagaStep step in steps)
             {
                 orchestrator.AddStep(step);
             }

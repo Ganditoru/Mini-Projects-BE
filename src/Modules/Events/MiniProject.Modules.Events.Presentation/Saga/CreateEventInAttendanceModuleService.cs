@@ -3,7 +3,7 @@ using MiniProject.Modules.Events.Presentation.gRPC;
 using MiniProjects.Common.Messaging.Contracts.gRPC;
 
 namespace MiniProject.Modules.Events.Presentation.Saga;
-public sealed class CreateEventInAttendanceModuleService(IGrpcCreateEvent gRPCCreateEvent) : ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse>
+public sealed class CreateEventInAttendanceModuleService(IGrpcCreateEvent gRPCCreateEvent) : ISagaStep
 {
     public async Task<CreateEventResponse> ExecuteAsync(CreateEventRequest request)
     {

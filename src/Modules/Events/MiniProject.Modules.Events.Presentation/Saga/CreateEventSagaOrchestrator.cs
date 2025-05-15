@@ -5,17 +5,17 @@ using MiniProjects.Common.Messaging.Contracts.gRPC;
 namespace MiniProject.Modules.Events.Presentation.Saga;
 public sealed class CreateEventSagaOrchestrator
 {
-    private readonly List<ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse>> _steps = new();
+    private readonly List<ISagaStep> _steps = new();
 
-    public void AddStep(ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse> step) => _steps.Add(step);
+    public void AddStep(ISagaStep step) => _steps.Add(step);
 
     public async Task<Result<string>> ExecuteSagaAsync(CreateEventRequest createEventRequest, CompensateEventRequest compensateEventRequest)
     {
-        var executedSteps = new Stack<ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse>>();
+        var executedSteps = new Stack<ISagaStep>();
 
         try
         {
-            foreach (ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse> step in _steps)
+            foreach (ISagaStep step in _steps)
             {
                 CreateEventResponse response = await step.ExecuteAsync(createEventRequest);
 
@@ -29,7 +29,7 @@ public sealed class CreateEventSagaOrchestrator
         {
             while (executedSteps.Count > 0)
             {
-                ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse> step = executedSteps.Pop();
+                ISagaStep step = executedSteps.Pop();
                 await step.CompensateAsync(compensateEventRequest);
             }
 

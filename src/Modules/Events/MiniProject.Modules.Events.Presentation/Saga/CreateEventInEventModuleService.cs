@@ -6,7 +6,7 @@ using MiniProject.Modules.Events.Domain.Abstractions;
 using MiniProjects.Common.Messaging.Contracts.gRPC;
 
 namespace MiniProject.Modules.Events.Presentation.Saga;
-public sealed class CreateEventInEventModuleService(ISender sender) : ISagaStep<CreateEventRequest, CreateEventResponse, CompensateEventRequest, CompensateEventResponse>
+public sealed class CreateEventInEventModuleService(ISender sender) : ISagaStep
 {
     public async Task<CreateEventResponse> ExecuteAsync(CreateEventRequest request)
     {
