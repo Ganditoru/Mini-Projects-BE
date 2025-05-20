@@ -23,6 +23,7 @@ using MiniProjects.Common.Messaging.Contracts.gRPC;
 using MiniProject.Modules.Events.Infrastructure.gRPC;
 using MiniProject.Modules.Events.Presentation.gRPC;
 using MiniProject.Modules.Events.Presentation.Saga;
+using MiniProject.Modules.Events.Presentation.Signal_R;
 
 namespace MiniProject.Modules.Events.Infrastructure;
 
@@ -30,6 +31,9 @@ public static class EventsModule
 {
     public static void MapEndpoints(IEndpointRouteBuilder app)
     {
+        
+        app.MapHub<NotificationHub>("/Signal_R/notifications").RequireCors("AllowAll");
+
         app.MapControllers();
     }
 
@@ -39,6 +43,17 @@ public static class EventsModule
     {
         services.AddControllersFromPresentationProject();
         services.AddMediatRHandlerAndValidation();
+
+        services.AddSignalR();
+        services.AddCors(opts =>
+        {
+            opts.AddPolicy("AllowAll", p =>
+              p.AllowAnyHeader()
+               .AllowAnyMethod()
+               .AllowCredentials()
+               .SetIsOriginAllowed(_ => true)
+            );
+        });
 
         services.AddGrpcSettings(configuration);
         services.AddSagaOrchestrator();

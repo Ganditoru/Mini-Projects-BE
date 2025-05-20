@@ -3,6 +3,7 @@ using Google.Protobuf.WellKnownTypes;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using MiniProject.Modules.Events.Application.Events.CancelEvent;
 using MiniProject.Modules.Events.Application.Events.CreateEvent;
 using MiniProject.Modules.Events.Application.Events.GetEvent;
@@ -14,13 +15,14 @@ using MiniProject.Modules.Events.Presentation.Abstraction;
 using MiniProject.Modules.Events.Presentation.RequestDTOs;
 using MiniProject.Modules.Events.Presentation.RequestDTOs.Events;
 using MiniProject.Modules.Events.Presentation.Saga;
+using MiniProject.Modules.Events.Presentation.Signal_R;
 using MiniProjects.Common.Messaging.Contracts.gRPC;
 
 namespace MiniProject.Modules.Events.Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class EventsController(ISender sender, CreateEventSagaOrchestrator createEventSagaOrchestrator) : ControllerBase
+public class EventsController(ISender sender, CreateEventSagaOrchestrator createEventSagaOrchestrator, IHubContext<NotificationHub> hub) : ControllerBase
 {
 
     [HttpGet("IResult/{id}")]
@@ -84,6 +86,8 @@ public class EventsController(ISender sender, CreateEventSagaOrchestrator create
         var createEventCommand = new CreateEventCommand(@event.CategoryId, @event.Title, @event.Description, @event.Location, @event.StartsAtUtc, @event.EndsAtUtc);
 
         Result<Guid> result = await sender.Send(createEventCommand);
+
+        await hub.Clients.All.SendAsync("EventCreated", new { result.Value });
 
         return result.IsSuccess ? Ok(result.Value) : ApiResults.Problem(result);
     }
