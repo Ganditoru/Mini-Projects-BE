@@ -2,26 +2,16 @@ using MiniProject.Api.Extensions;
 using MiniProject.Modules.Events.Infrastructure;
 using MiniProject.Modules.Ticketing.Infrastructure;
 using MiniProject.Modules.Users.Infrastructure;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(5021, lo =>
-    {
-        lo.UseHttps();                        
-        lo.Protocols = HttpProtocols.Http1; 
-    });
-    options.ListenAnyIP(5022, lo =>
-    {                           
-        lo.Protocols = HttpProtocols.Http2;
-    });
-    options.ListenAnyIP(5023, lo =>
-    {
-        lo.Protocols = HttpProtocols.Http1;
-    });
-});
+builder.AddKestralHttpConfigurations();
+builder.AddLoggingWithSerilog();
+
+builder.Host.UseSerilog((ctx, lc) => lc
+  .ReadFrom.Configuration(ctx.Configuration)
+);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

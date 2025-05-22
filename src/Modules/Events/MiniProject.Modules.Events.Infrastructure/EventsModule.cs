@@ -139,6 +139,8 @@ public static class EventsModule
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(Application.AssemblyReference.Assembly);
+
+            config.AddOpenBehavior(typeof(RequestLoggingPipelineBehavior<,>));
         });
 
         services.AddValidatorsFromAssembly(Application.AssemblyReference.Assembly, includeInternalTypes: true);

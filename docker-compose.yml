@@ -50,6 +50,15 @@ services:
     ports:
       - 5433:5433
 
+  evently.seq:
+    image: datalust/seq:latest
+    container_name: Evently.Seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 5342:5342
+      - 8081:80
+
   miniproject.rabbitmq:
     image: rabbitmq:3-management            
     container_name: MiniProject.RabbitMQ    
