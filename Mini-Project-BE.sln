@@ -5,9 +5,9 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{93D68902-B0F6-451A-91FB-0B244DDF5E2A}"
 	ProjectSection(SolutionItems) = preProject
-		..\Evently-Modular-Monolith\.editorconfig = ..\Evently-Modular-Monolith\.editorconfig
-		..\Evently-Modular-Monolith\.gitignore = ..\Evently-Modular-Monolith\.gitignore
-		..\Evently-Modular-Monolith\Directory.Build.props = ..\Evently-Modular-Monolith\Directory.Build.props
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C60E2325-72A8-4BC6-A02B-2A9B60CF6BB7}"
@@ -67,6 +67,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniProject.Modules.Attendance.Domain", "src\Modules\Attendance\MiniProject.Modules.Attendance.Domain\MiniProject.Modules.Attendance.Domain.csproj", "{83A5D212-6431-4874-BE06-9EA027738CA6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniProject.Modules.Attendance.Application", "src\Modules\Attendance\MiniProject.Modules.Attendance.Application\MiniProject.Modules.Attendance.Application.csproj", "{69BF524E-BBFD-4610-AFAC-8722C90F855F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{34E637E5-CE40-4CD3-82EC-C7224C1667DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniProject.Modules.Events.Tests", "src\Modules\Events\test\MiniProject.Modules.Events.Tests\MiniProject.Modules.Events.Tests.csproj", "{247EAA8A-2A56-48CD-9979-61224730E556}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -158,6 +162,10 @@ Global
 		{69BF524E-BBFD-4610-AFAC-8722C90F855F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69BF524E-BBFD-4610-AFAC-8722C90F855F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69BF524E-BBFD-4610-AFAC-8722C90F855F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{247EAA8A-2A56-48CD-9979-61224730E556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{247EAA8A-2A56-48CD-9979-61224730E556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{247EAA8A-2A56-48CD-9979-61224730E556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{247EAA8A-2A56-48CD-9979-61224730E556}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,6 +198,8 @@ Global
 		{376BC21D-61CF-433C-A0F6-3615D7400386} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{83A5D212-6431-4874-BE06-9EA027738CA6} = {3487B37A-057E-49AD-8A5B-F4C70DF49361}
 		{69BF524E-BBFD-4610-AFAC-8722C90F855F} = {3487B37A-057E-49AD-8A5B-F4C70DF49361}
+		{34E637E5-CE40-4CD3-82EC-C7224C1667DF} = {52E13E59-B51D-4ABC-81A1-196DB49E4C5C}
+		{247EAA8A-2A56-48CD-9979-61224730E556} = {34E637E5-CE40-4CD3-82EC-C7224C1667DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5DD73D5D-6FF7-4CF9-853A-F145507E7D77}
