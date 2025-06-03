@@ -1,4 +1,5 @@
 ﻿
+using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using MiniProject.Modules.Users.Domain.Users;
 using MiniProject.Modules.Users.Infrastructure.Database;
@@ -11,6 +12,13 @@ internal sealed class UserRepository(UserDbContext context) : IUserRepository
         return context.Users
             .Include(u => u.Notifications)
             .FirstOrDefault(u => u.Id == id);
+    }
+
+    public async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken)
+    {
+        return await context.Users
+            .Include(u => u.Notifications)
+            .FirstOrDefaultAsync(u => u.Email == email, cancellationToken: cancellationToken);
     }
 
     public void Insert(User user)

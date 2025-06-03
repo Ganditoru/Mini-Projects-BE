@@ -1,17 +1,24 @@
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MiniProject.Api.Extensions;
 using MiniProject.Modules.Events.Infrastructure;
 using MiniProject.Modules.Ticketing.Infrastructure;
 using MiniProject.Modules.Users.Infrastructure;
+using MiniProject.Modules.Users.Infrastructure.Authentification;
 using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+builder.AddAuthentication();
 builder.AddKestralHttpConfigurations();
 builder.AddLoggingWithSerilog();
 
 builder.Host.UseSerilog((ctx, lc) => lc
   .ReadFrom.Configuration(ctx.Configuration)
 );
+
+
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -21,6 +28,7 @@ builder.Services.AddEventsModule(builder.Configuration);
 builder.Services.AddTicketingModule(builder.Configuration);
 
 builder.Services.AddRabbitMqMessaging(builder.Configuration);
+
 
 WebApplication app = builder.Build();
 
@@ -38,6 +46,9 @@ if (app.Environment.IsDevelopment())
 
     app.ApplyMigrations();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 UsersModule.MapEndpoints(app);
 EventsModule.MapEndpoints(app);

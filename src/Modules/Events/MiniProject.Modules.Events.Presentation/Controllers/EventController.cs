@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using Google.Protobuf.WellKnownTypes;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -44,6 +45,7 @@ public class EventsController(ISender sender, CreateEventSagaOrchestrator create
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetEvents()
     {
 

@@ -16,7 +16,7 @@ internal static class GetUser
 
             return response is null ? Results.NotFound() : Results.Ok(response);
         })
-            .WithTags(Tags.User);
+            .WithTags(Tags.User).RequireAuthorization();
     }
 
 }

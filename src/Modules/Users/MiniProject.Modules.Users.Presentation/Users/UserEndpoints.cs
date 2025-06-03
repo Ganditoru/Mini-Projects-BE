@@ -8,5 +8,6 @@ public static  class UserEndpoints
         RegisterUser.MapEndpoint(app);
         GetUser.MapEndpoint(app);
         GetUsers.MapEndpoint(app);
+        LoginUser.MapEndpoint(app);
     }
 }

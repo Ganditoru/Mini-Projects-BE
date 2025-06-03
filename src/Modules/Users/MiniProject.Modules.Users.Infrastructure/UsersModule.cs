@@ -23,6 +23,7 @@ using MiniProject.Modules.Users.Infrastructure.Outbox;
 using MiniProject.Modules.Users.Infrastructure.PublicApi;
 using Quartz;
 using Microsoft.Extensions.DependencyInjection;
+using MiniProject.Modules.Users.Infrastructure.Authentification;
 
 namespace MiniProject.Modules.Users.Infrastructure;
 public static class UsersModule
@@ -47,6 +48,7 @@ public static class UsersModule
         services.AddValidatorsFromAssembly(Application.AssemblyReference.Assembly, includeInternalTypes: true);
 
         services.AddSingleton<IEventBus, EventBus>();
+        services.AddSingleton<IJwtProvider, JwtProvider>();
 
         services.AddInfrastructure(configuration);
         return services;
