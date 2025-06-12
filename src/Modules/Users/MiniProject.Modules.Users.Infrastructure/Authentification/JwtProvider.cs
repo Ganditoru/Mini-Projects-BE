@@ -15,7 +15,8 @@ internal sealed class JwtProvider() : IJwtProvider
         Claim[] claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(ClaimTypes.Role, "Admin")
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_super_duper_huper_secret_key"));

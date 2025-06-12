@@ -45,7 +45,7 @@ public class EventsController(ISender sender, CreateEventSagaOrchestrator create
     }
 
     [HttpGet]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetEvents()
     {
 
